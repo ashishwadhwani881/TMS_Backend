@@ -1,0 +1,258 @@
+📘 Task Management System – Backend API
+
+A production-grade backend API built with Django + Django REST Framework for managing tasks with advanced business rules, role-based access control, analytics, and security features.
+
+🚀 Tech Stack
+
+Python 3.12
+
+Django
+
+Django REST Framework
+
+JWT Authentication (SimpleJWT)
+
+PostgreSQL / SQLite (dev)
+
+Django Admin
+
+Angular (Frontend – separate repo)
+
+🧩 Key Features
+🔐 Authentication & Authorization
+
+JWT authentication with refresh token rotation
+
+Secure login, logout, register, email verification
+
+Device-based session tracking
+
+Max concurrent device limit
+
+Role-based access control:
+
+MANAGER
+
+DEVELOPER
+
+AUDITOR
+
+📋 Task Management
+
+Create, update, delete tasks
+
+Parent–child task hierarchy
+
+Strict validation for circular dependencies
+
+Assignment rules enforced by role
+
+Time-based access control (Developers: 9AM–6PM)
+
+CRITICAL priority override
+
+🔄 Business Rules
+
+Parent completion auto-completes pending children
+
+Child blocked → parent blocked
+
+Atomic bulk task status updates
+
+Priority auto-escalation when deadline < 24 hours
+
+Task history logging for all cascaded changes
+
+📊 Analytics
+
+My Tasks analytics
+
+Team Tasks analytics
+
+Efficiency score calculation
+
+Optimized ORM queries
+
+Analytics endpoint excluded from audit noise
+
+🛡️ Security & Performance
+
+Role-based rate limiting (READ / WRITE split)
+
+IP whitelisting
+
+Smart CORS configuration
+
+Audit logging middleware
+
+Middleware-level JWT handling
+
+Safe failure design (non-blocking middleware)
+
+🛠️ Admin Panel Enhancements
+
+Weekly CSV report generation
+
+Bulk task reassignment with workload warnings
+
+Tasks needing attention filter
+
+Colored status indicators
+
+Task history inspection
+
+📁 Project Structure
+backend/
+├── apps/
+│   ├── users/
+│   ├── tasks/
+│   ├── audits/
+│   ├── notifications/
+│
+├── common/
+│   └── middleware/
+│       ├── rate_limit.py
+│       ├── audit.py
+│       ├── ip_whitelist.py
+│       └── priority_escalation.py
+│
+├── config/
+│   ├── settings/
+│   │   ├── base.py
+│   │   └── local.py
+│   ├── wsgi.py
+│   └── asgi.py
+│
+├── manage.py
+└── README.md
+
+⚙️ Setup Instructions (Using uv)
+1️⃣ Install uv
+pip install uv
+
+
+Or (recommended):
+
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
+Verify:
+
+uv --version
+
+2️⃣ Clone Repository
+git clone https://github.com/ashishwadhwani881/TMS_Backend.git
+cd TMS_Backend/backend
+
+3️⃣ Create Virtual Environment & Install Dependencies
+uv venv
+source .venv/bin/activate      # Linux / macOS
+.venv\Scripts\activate         # Windows
+
+uv pip install -r requirements.txt
+
+
+📌 uv automatically uses the virtual environment.
+
+4️⃣ Environment Variables
+
+Create .env or settings/local.py:
+
+DEBUG=True
+SECRET_KEY=your-secret-key
+
+5️⃣ Run Migrations
+uv run python manage.py makemigrations
+uv run python manage.py migrate
+
+6️⃣ Create Superuser
+uv run python manage.py createsuperuser
+
+7️⃣ Run Development Server
+uv run python manage.py runserver
+
+
+Server runs at:
+
+http://127.0.0.1:8000/
+
+🔑 Authentication Endpoints
+Method	Endpoint
+POST	/api/auth/register/
+POST	/api/auth/login/
+POST	/api/auth/refresh/
+POST	/api/auth/logout/
+GET	/api/auth/me/
+📋 Task Endpoints
+Method	Endpoint
+GET	/api/tasks/
+POST	/api/tasks/
+GET	/api/tasks/{id}/
+PATCH	/api/tasks/{id}/
+DELETE	/api/tasks/{id}/
+POST	/api/tasks/bulk-update/
+📊 Analytics Endpoint
+GET /api/tasks/analytics/
+
+
+Returns:
+
+My tasks summary
+
+Team tasks summary
+
+Efficiency score
+
+🛡️ Rate Limiting Rules
+Role	Read	Write
+Developer	100/hr	20/hr
+Manager	200/hr	50/hr
+Auditor	Unlimited	0
+🧠 Design Highlights
+
+Middleware-driven architecture
+
+Service layer for business logic
+
+Atomic transactions
+
+Strict validation
+
+Auditability
+
+Scalable & testable design
+
+🧪 Testing
+
+All endpoints tested via Postman
+
+Edge cases validated:
+
+Time-based access
+
+Parent–child constraints
+
+Bulk update atomicity
+
+Rate limit enforcement
+
+JWT refresh rotation
+
+🎯 Assignment Coverage
+
+✔ Authentication
+✔ Role-based permissions
+✔ Task hierarchy
+✔ Business rules
+✔ Analytics
+✔ Rate limiting
+✔ Admin actions
+✔ Audit logging
+✔ Security (CORS, IP whitelist)
+
+All assignment requirements fully implemented.
+
+👨‍💻 Author
+
+Ashish Wadhwani
+Backend Developer (Django + DRF)

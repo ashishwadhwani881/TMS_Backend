@@ -32,7 +32,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "taskmanager_db",
         "USER": "postgres",
-        "PASSWORD": "ashish123",
+        "PASSWORD": "12345",
         "HOST": "localhost",
         "PORT": "5432",
     }
