@@ -6,7 +6,7 @@ class IPWhitelistMiddleware:
    
     ALLOWED_IPS = {
         "127.0.0.1",       
-        "192.168.1.10",    
+        "10.0.1.152",    
     }
 
     def __init__(self, get_response):

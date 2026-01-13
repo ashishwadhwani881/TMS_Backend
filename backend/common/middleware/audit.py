@@ -12,7 +12,7 @@ class AuditLoggingMiddleware:
 
         response = self.get_response(request)
 
-        # Skip analytics endpoint
+       
         if request.path.startswith("/api/tasks/analytics/"):
             return response
 

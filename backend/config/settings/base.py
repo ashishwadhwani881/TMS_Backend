@@ -58,6 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
     # Custom middlewares
+    "common.middleware.smart_security.SmartSecurityMiddleware",
     "common.middleware.ip_whitelist.IPWhitelistMiddleware",
     "common.middleware.rate_limit.RoleBasedRateLimitMiddleware",
     "common.middleware.priority_escalation.PriorityEscalationMiddleware",
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # JWT
 # -------------------------------------------------
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 
     "ROTATE_REFRESH_TOKENS": True,
@@ -138,7 +139,7 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 
-    # 🔐 JWT auth support
+    
     "SECURITY": [
         {
             "bearerAuth": [],
@@ -159,6 +160,18 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}
+
+SMART_SECURITY = {
+    "MAX_FAILURES": 5,
+    "FAILURE_WINDOW_MINUTES": 10,
+    "BLOCK_DURATION_MINUTES": 60,
+}
 
 
 # Static files (CSS, JavaScript, Images)
